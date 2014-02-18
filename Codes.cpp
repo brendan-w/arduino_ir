@@ -69,6 +69,8 @@ int getCarrier(const IRCode* desired)
  * Full list of burst pairs is compiled prior to transmission (slower, but saves space)
  */
 
+//TVs
+
 const BurstPair dict_samsung_tv[] PROGMEM = {{172, 171}, {21, 65}, {21, 22}};
 const Nibbles code_samsung_tv_POWER_ON[]     PROGMEM = {{0, 1}, {1, 1}, {2, 2}, {2, 2}, {2, 1}, {1, 1}, {2, 2}, {2, 2}, {2, 1}, {2, 2}, {1, 1}, {2, 2}, {1, 2}, {1, 1}, {2, 2}, {1, 1}, {2, 2}};
 const Nibbles code_samsung_tv_POWER_OFF[]    PROGMEM = {{0, 1}, {1, 1}, {2, 2}, {2, 2}, {2, 1}, {1, 1}, {2, 2}, {2, 2}, {2, 2}, {2, 2}, {1, 1}, {2, 2}, {1, 1}, {1, 1}, {2, 2}, {1, 1}, {2, 2}};
@@ -196,10 +198,22 @@ const Nibbles code_rca_tv_VOLUME_DOWN[]  PROGMEM = {{0, 4}, {4, 4}, {4, 1}, {1, 
 const Nibbles code_rca_tv_CHANNEL_UP[]   PROGMEM = {{0, 4}, {4, 4}, {4, 1}, {1, 4}, {1, 4}, {4, 1}, {4, 1}, {1, 1}, {1, 4}, {4, 1}, {4, 1}, {1, 4}, {1, 2}, {3, 0}};
 const Nibbles code_rca_tv_CHANNEL_DOWN[] PROGMEM = {{0, 4}, {4, 4}, {4, 1}, {1, 4}, {1, 4}, {4, 1}, {1, 1}, {1, 1}, {1, 4}, {4, 1}, {4, 1}, {1, 4}, {4, 2}, {3, 0}};
 
+//projectors
+
+const BurstPair dict_sharp_projector[] PROGMEM = {{10, 70}, {10, 30}, {10, 1657}};
+const Nibbles code_sharp_projector_POWER_STANDBY[] PROGMEM = {{0, 1}, {0, 0}, {1, 0}, {0, 1}, {0, 1}, {1, 1}, {0, 0}, {1, 2}, {0, 1}, {0, 0}, {1, 1}, {1, 0}, {1, 0}, {0, 0}, {1, 1}, {0, 1}};
+const Nibbles code_sharp_projector_POWER_ON[] PROGMEM = {{0, 1}, {0, 0}, {1, 1}, {0, 0}, {1, 0}, {1, 0}, {1, 0}, {1, 2}, {0, 1}, {0, 0}, {1, 0}, {1, 1}, {0, 1}, {0, 1}, {0, 1}, {0, 1}};
+const Nibbles code_sharp_projector_VOLUME_UP[] PROGMEM = {{0, 1}, {0, 0}, {1, 1}, {1, 0}, {1, 0}, {1, 1}, {1, 0}, {1, 2}, {0, 1}, {0, 0}, {1, 0}, {0, 1}, {0, 1}, {0, 0}, {0, 1}, {0, 1}};
+const Nibbles code_sharp_projector_VOLUME_DOWN[] PROGMEM = {{0, 1}, {0, 0}, {1, 0}, {1, 0}, {1, 0}, {1, 1}, {1, 0}, {1, 2}, {0, 1}, {0, 0}, {1, 1}, {0, 1}, {0, 1}, {0, 0}, {0, 1}, {0, 1}};
+
+//sources
+
 
 /*
  * Codes organized by function, then sorted by manufacturers (major to minor)
  */
+
+//TVs
 
 //POWER ON==================================================
 const IRCode POWER_ON[] PROGMEM = {
@@ -333,3 +347,32 @@ const IRCode CHANNEL_DOWN[] PROGMEM = {
   {dict_rca_tv, code_rca_tv_CHANNEL_DOWN, 27, 9}
 };
 const uint8_t CHANNEL_DOWN_TOTAL = NUM_ELEM(CHANNEL_DOWN);
+
+
+
+//projectors
+
+//POWER ON==================================================
+const IRCode PROJ_POWER_STANDBY[] PROGMEM = {
+  {dict_sharp_projector, code_sharp_projector_POWER_STANDBY, 32, 13}
+};
+const uint8_t PROJ_POWER_STANDBY_TOTAL = NUM_ELEM(PROJ_POWER_STANDBY);
+
+//POWER OFF=================================================
+const IRCode PROJ_POWER_ON[] PROGMEM = {
+  {dict_sharp_projector, code_sharp_projector_POWER_ON, 32, 13}
+};
+const uint8_t PROJ_POWER_OFF_TOTAL = NUM_ELEM(PROJ_POWER_ON);
+
+
+//VOLUME UP=================================================
+const IRCode PROJ_VOLUME_UP[] PROGMEM = {
+  {dict_sharp_projector, code_sharp_projector_VOLUME_UP, 32, 13}
+};
+const uint8_t PROJ_VOLUME_UP_TOTAL = NUM_ELEM(PROJ_VOLUME_UP);
+
+//VOLUME DOWN===============================================
+const IRCode PROJ_VOLUME_DOWN[] PROGMEM = {
+  {dict_sharp_projector, code_sharp_projector_VOLUME_DOWN, 32, 13}
+};
+const uint8_t PROJ_VOLUME_DOWN_TOTAL = NUM_ELEM(PROJ_VOLUME_DOWN);

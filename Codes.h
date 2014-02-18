@@ -53,6 +53,8 @@ int getCarrier(const IRCode* desired);
 int getLength(const IRCode* desired);
 
 //code tables
+
+//TVs
 extern const IRCode POWER_ON[] PROGMEM;
 extern const uint8_t POWER_ON_TOTAL;
 extern const IRCode POWER_OFF[] PROGMEM;
@@ -67,3 +69,13 @@ extern const IRCode CHANNEL_UP[] PROGMEM;
 extern const uint8_t CHANNEL_UP_TOTAL;
 extern const IRCode CHANNEL_DOWN[] PROGMEM;
 extern const uint8_t CHANNEL_DOWN_TOTAL;
+
+//projectors
+extern const IRCode PROJ_POWER_STANDBY[] PROGMEM;
+extern const uint8_t PROJ_POWER_STANDBY_TOTAL;
+extern const IRCode PROJ_POWER_ON[] PROGMEM;
+extern const uint8_t PROJ_POWER_OFF_TOTAL;
+extern const IRCode PROJ_VOLUME_UP[] PROGMEM;
+extern const uint8_t PROJ_VOLUME_UP_TOTAL;
+extern const IRCode PROJ_VOLUME_DOWN[] PROGMEM;
+extern const uint8_t PROJ_VOLUME_DOWN_TOTAL;

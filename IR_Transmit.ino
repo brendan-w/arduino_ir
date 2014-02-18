@@ -54,7 +54,6 @@ void loop()
   //perform action based on button press states
   if(currentUp && !currentDown)
   {
-    
     switch(bankNum)
     {
       case 0: //TV power on
@@ -84,8 +83,6 @@ void loop()
       case 9:
         break;
     }
-    currentCode++;
-    delay(CODE_DELAY);
   }
   else if(currentDown && !currentUp)
   {
@@ -118,12 +115,18 @@ void loop()
       case 9:
         break;
     }
-    currentCode++;
-    delay(CODE_DELAY);
   }
   else
   {
     currentCode = 0;
+    setDisplay(bankNum);
+  }
+  
+  if(currentDown != currentUp) //XOR (one of the buttons is pressed)
+  {
+    setDisplay(currentCode % 10);
+    currentCode++;
+    delay(CODE_DELAY);
   }
   
   //sendCode(POWER_ON + 3);
@@ -132,11 +135,8 @@ void loop()
 
 void setDisplay(int n) //0-9
 {
-  //turn everything off FIRST (one resistor for many LEDS)
-  for(int i = OUTPUT_DISPLAY; i < OUTPUT_DISPLAY + 10; i++)
-  {
-    digitalWrite(i, LOW);
-  }
+  PORTD &= B00000011; //LOW
+  PORTB &= B11110000; //LOW
   
   //turn on the corresponding pin, if its in the correct range
   if((n >= 0) && (n <= 9))
