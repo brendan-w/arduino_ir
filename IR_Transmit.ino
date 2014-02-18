@@ -7,27 +7,19 @@
 #include "Codes.h"
 
 
-//digital pin layout
-#define OUTPUT_IR_A 4 //12 - 8
-#define OUTPUT_IR_B 5 //13 - 8
 #define OUTPUT_DISPLAY 2 //occupies pins [x, x+9]
-
-//buttons!
 #define INPUT_BANK A2
 #define INPUT_UP A1
 #define INPUT_DOWN A0
 #define CODE_DELAY 6
 
-//vars
-int bankNum = 0;
-int lastBank = 0;
-
-int currentCode = 0;
+//running vars
+int bankNum = 0; //current code bank (bar graph indicator)
+int lastBank = 0; //old button value (to detect DOWN press)
+int currentCode = 0; //current code to send (incremented every loop())
 
 void setup()
 {
-  //Serial.begin(9600);
-  
   //make all the pins outputs
   for(int i = 2; i < 14; i++)
   {
@@ -44,21 +36,22 @@ void setup()
 
 void loop()
 {
+  //get button values
   //buttons take so long to analogRead(), no need to debounce
   int currentBank = readButton(INPUT_BANK);
   int currentUp = readButton(INPUT_UP);
   int currentDown = readButton(INPUT_DOWN);
   
-  //switch bank on button down
+  //switch bank when button is DOWN
   if(currentBank && (!lastBank))
   {
     bankNum++;
-    bankNum = bankNum % 10;
+    bankNum = bankNum % 10; //wrap
     setDisplay(bankNum);
   }
   lastBank = currentBank;
   
-  
+  //perform action based on button press states
   if(currentUp && !currentDown)
   {
     
@@ -137,6 +130,30 @@ void loop()
 }
 
 
+void setDisplay(int n) //0-9
+{
+  //turn everything off FIRST (one resistor for many LEDS)
+  for(int i = OUTPUT_DISPLAY; i < OUTPUT_DISPLAY + 10; i++)
+  {
+    digitalWrite(i, LOW);
+  }
+  
+  //turn on the corresponding pin, if its in the correct range
+  if((n >= 0) && (n <= 9))
+  {
+    digitalWrite(OUTPUT_DISPLAY + n, HIGH);
+  }
+}
+
+int readButton(int pin)
+{
+  int val = analogRead(pin);
+  if(val >= 512) { return 1; }
+  return 0;
+}
+
+
+//function for sending an IR code. Provide pointer to code.
 void sendCode(const IRCode* code)
 {
   BurstPair* pairs = getCode(code);
@@ -153,44 +170,17 @@ void sendCode(const IRCode* code)
 
 void sendBurst(BurstPair pair, uint8_t carrier)
 {
-  //ON
+  //ON portion
   for(int i = 0; i < pair.on; i++)
   {
-    //bitWrite(PORTB, OUTPUT_IR_A, 1);
     PORTB |= B00110000; //HIGH
     delayMicroseconds(carrier);
-    //bitWrite(PORTB, OUTPUT_IR_A, 0);
     PORTB &= B11001111; //LOW
     delayMicroseconds(carrier);
   }
   
-  //OFF
-  //bitWrite(PORTB, OUTPUT_IR_A, 0);
+  //OFF portion
   PORTB &= B11001111; //LOW
   delayMicroseconds(carrier * 2 * pair.off);
 }
 
-
-void setDisplay(int n) //0-9
-{
-  //turn everything off FIRST (one resistor for many LEDS)
-  for(int i = OUTPUT_DISPLAY; i < OUTPUT_DISPLAY + 10; i++)
-  {
-    digitalWrite(i, LOW);
-  }
-  
-  if((n >= 0) && (n <= 9))
-  {
-    digitalWrite(OUTPUT_DISPLAY + n, HIGH);
-  }
-}
-
-int readButton(int pin)
-{
-  int val = analogRead(pin);
-  if(val >= 512)
-  {
-    return 1;
-  }
-  return 0;
-}
