@@ -1,3 +1,8 @@
+/*
+ * Written by Brendan Whitfield
+ *
+ */
+
 
 #include <avr/pgmspace.h>
 #include <stdint.h>

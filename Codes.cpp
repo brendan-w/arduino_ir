@@ -1,5 +1,5 @@
 /*
- * Written by: Brendan Whitfield, 2013
+ * Written by Brendan Whitfield
  *
  * Contains all of the codes, and code accessors/decompressors needed to achieve the desired function
  * Use by calling getCode() with a pointer to the desired code.
