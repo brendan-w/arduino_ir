@@ -78,9 +78,9 @@ void loop()
         break;
       case 7:
         break;
-      case 8: //Sharp projector standby
-        currentCode = currentCode % PROJ_POWER_STANDBY_TOTAL;
-        sendCode(PROJ_POWER_STANDBY + currentCode);
+      case 8: //Sharp projector power on
+        currentCode = currentCode % PROJ_POWER_ON_TOTAL;
+        sendCode(PROJ_POWER_ON + currentCode);
         break;
       case 9: //Sharp projector volume up
         currentCode = currentCode % PROJ_VOLUME_UP_TOTAL;
@@ -114,9 +114,9 @@ void loop()
         break;
       case 7:
         break;
-      case 8: //Sharp projector power on
-        currentCode = currentCode % PROJ_POWER_ON_TOTAL;
-        sendCode(PROJ_POWER_ON + currentCode);
+      case 8: //Sharp projector off/standby
+        currentCode = currentCode % PROJ_POWER_OFF_TOTAL;
+        sendCode(PROJ_POWER_OFF + currentCode);
         break;
       case 9: //Sharp projector volume down
         currentCode = currentCode % PROJ_VOLUME_DOWN_TOTAL;

@@ -206,7 +206,13 @@ const Nibbles code_sharp_projector_POWER_ON[] PROGMEM = {{0, 1}, {0, 0}, {1, 1},
 const Nibbles code_sharp_projector_VOLUME_UP[] PROGMEM = {{0, 1}, {0, 0}, {1, 1}, {1, 0}, {1, 0}, {1, 1}, {1, 0}, {1, 2}, {0, 1}, {0, 0}, {1, 0}, {0, 1}, {0, 1}, {0, 0}, {0, 1}, {0, 1}};
 const Nibbles code_sharp_projector_VOLUME_DOWN[] PROGMEM = {{0, 1}, {0, 0}, {1, 0}, {1, 0}, {1, 0}, {1, 1}, {1, 0}, {1, 2}, {0, 1}, {0, 0}, {1, 1}, {0, 1}, {0, 1}, {0, 0}, {0, 1}, {0, 1}};
 
-//sources
+const BurstPair dict_sharp2_projector[] PROGMEM = {{10, 70}, {10, 30}, {10, 1632}, {10, 1636}, {10, 1716}, {10, 1676}};
+const Nibbles code_sharp2_projector_POWER_ON[] PROGMEM = {{0, 1}, {0, 0}, {1, 1}, {0, 0}, {1, 0}, {1, 0}, {1, 0}, {1, 2}, {0, 1}, {0, 0}, {1, 0}, {1, 1}, {0, 1}, {0, 1}, {0, 1}, {0, 2}, {0, 1}, {0, 0}, {1, 1}, {0, 0}, {1, 0}, {1, 0}, {1, 0}, {1, 2}, {0, 1}, {0, 0}, {1, 0}, {1, 1}, {0, 1}, {0, 1}, {0, 1}, {0, 2}, {0, 1}, {0, 0}, {1, 1}, {0, 0}, {1, 0}, {1, 0}, {1, 0}, {1, 1}};
+const Nibbles code_sharp2_projector_POWER_OFF[] PROGMEM = {{0, 1}, {0, 0}, {1, 1}, {0, 0}, {1, 0}, {1, 1}, {0, 0}, {1, 3}, {0, 1}, {0, 0}, {1, 0}, {1, 1}, {0, 1}, {0, 0}, {1, 1}, {0, 3}, {0, 1}, {0, 0}, {1, 1}, {0, 0}, {1, 0}, {1, 1}, {0, 0}, {1, 3}, {0, 1}, {0, 0}, {1, 0}, {1, 1}, {0, 1}, {0, 0}, {1, 1}, {0, 3}, {0, 1}, {0, 0}, {1, 1}, {0, 0}, {1, 0}, {1, 1}, {0, 0}, {1, 1}};
+const Nibbles code_sharp2_projector_VOLUME_UP[] PROGMEM = {{0, 1}, {0, 0}, {1, 1}, {1, 0}, {1, 0}, {1, 1}, {1, 0}, {1, 4}, {0, 1}, {0, 0}, {1, 0}, {0, 1}, {0, 1}, {0, 0}, {0, 1}, {0, 4}, {0, 1}, {0, 0}, {1, 1}, {1, 0}, {1, 0}, {1, 1}, {1, 0}, {1, 4}, {0, 1}, {0, 0}, {1, 0}, {0, 1}, {0, 1}, {0, 0}, {0, 1}, {0, 4}, {0, 1}, {0, 0}, {1, 1}, {1, 0}, {1, 0}, {1, 1}, {1, 0}, {1, 4}, {0, 1}, {0, 0}, {1, 0}, {0, 1}, {0, 1}, {0, 0}, {0, 1}, {0, 4}, {0, 1}, {0, 0}, {1, 1}, {1, 0}, {1, 0}, {1, 1}, {1, 0}, {1, 4}, {0, 1}, {0, 0}, {1, 0}, {0, 1}, {0, 1}, {0, 0}, {0, 1}, {0, 1}};
+const Nibbles code_sharp2_projector_VOLUME_DOWN[] PROGMEM = {{0, 1}, {0, 0}, {1, 0}, {1, 0}, {1, 0}, {1, 1}, {1, 0}, {1, 5}, {0, 1}, {0, 0}, {1, 1}, {0, 1}, {0, 1}, {0, 0}, {0, 1}, {0, 5}, {0, 1}, {0, 0}, {1, 0}, {1, 0}, {1, 0}, {1, 1}, {1, 0}, {1, 5}, {0, 1}, {0, 0}, {1, 1}, {0, 1}, {0, 1}, {0, 0}, {0, 1}, {0, 5}, {0, 1}, {0, 0}, {1, 0}, {1, 0}, {1, 0}, {1, 1}, {1, 0}, {1, 5}, {0, 1}, {0, 0}, {1, 1}, {0, 1}, {0, 1}, {0, 0}, {0, 1}, {0, 5}, {0, 1}, {0, 0}, {1, 0}, {1, 0}, {1, 0}, {1, 1}, {1, 0}, {1, 5}, {0, 1}, {0, 0}, {1, 1}, {0, 1}, {0, 1}, {0, 0}, {0, 1}, {0, 1}};
+
+
 
 
 /*
@@ -352,27 +358,30 @@ const uint8_t CHANNEL_DOWN_TOTAL = NUM_ELEM(CHANNEL_DOWN);
 
 //projectors
 
-//POWER ON==================================================
-const IRCode PROJ_POWER_STANDBY[] PROGMEM = {
-  {dict_sharp_projector, code_sharp_projector_POWER_STANDBY, 32, 13}
-};
-const uint8_t PROJ_POWER_STANDBY_TOTAL = NUM_ELEM(PROJ_POWER_STANDBY);
 
-//POWER OFF=================================================
+//POWER ON=================================================
 const IRCode PROJ_POWER_ON[] PROGMEM = {
-  {dict_sharp_projector, code_sharp_projector_POWER_ON, 32, 13}
+  {dict_sharp_projector, code_sharp_projector_POWER_ON, 32, 13}//,
+  //{dict_sharp2_projector, code_sharp2_projector_POWER_ON, 80, 13}
 };
 const uint8_t PROJ_POWER_ON_TOTAL = NUM_ELEM(PROJ_POWER_ON);
 
+//POWER OFF/standby==================================================
+const IRCode PROJ_POWER_OFF[] PROGMEM = {
+  {dict_sharp_projector, code_sharp_projector_POWER_STANDBY, 32, 13}
+};
+const uint8_t PROJ_POWER_OFF_TOTAL = NUM_ELEM(PROJ_POWER_OFF);
 
 //VOLUME UP=================================================
 const IRCode PROJ_VOLUME_UP[] PROGMEM = {
-  {dict_sharp_projector, code_sharp_projector_VOLUME_UP, 32, 13}
+  {dict_sharp_projector, code_sharp_projector_VOLUME_UP, 32, 13}//,
+  //{dict_sharp2_projector, code_sharp2_projector_VOLUME_UP, 128, 13}
 };
 const uint8_t PROJ_VOLUME_UP_TOTAL = NUM_ELEM(PROJ_VOLUME_UP);
 
 //VOLUME DOWN===============================================
 const IRCode PROJ_VOLUME_DOWN[] PROGMEM = {
-  {dict_sharp_projector, code_sharp_projector_VOLUME_DOWN, 32, 13}
+  {dict_sharp_projector, code_sharp_projector_VOLUME_DOWN, 32, 13}//,
+  //{dict_sharp2_projector, code_sharp2_projector_VOLUME_DOWN, 128, 13}
 };
 const uint8_t PROJ_VOLUME_DOWN_TOTAL = NUM_ELEM(PROJ_VOLUME_DOWN);
