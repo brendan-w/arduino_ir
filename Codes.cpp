@@ -362,7 +362,7 @@ const uint8_t PROJ_POWER_STANDBY_TOTAL = NUM_ELEM(PROJ_POWER_STANDBY);
 const IRCode PROJ_POWER_ON[] PROGMEM = {
   {dict_sharp_projector, code_sharp_projector_POWER_ON, 32, 13}
 };
-const uint8_t PROJ_POWER_OFF_TOTAL = NUM_ELEM(PROJ_POWER_ON);
+const uint8_t PROJ_POWER_ON_TOTAL = NUM_ELEM(PROJ_POWER_ON);
 
 
 //VOLUME UP=================================================

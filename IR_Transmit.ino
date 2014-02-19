@@ -11,7 +11,7 @@
 #define INPUT_BANK A2
 #define INPUT_UP A1
 #define INPUT_DOWN A0
-#define CODE_DELAY 6
+#define CODE_DELAY 8
 
 //running vars
 int bankNum = 0; //current code bank (bar graph indicator)
@@ -64,7 +64,7 @@ void loop()
         currentCode = currentCode % VOLUME_UP_TOTAL;
         sendCode(VOLUME_UP + currentCode);
         break;
-      case 2:
+      case 2: //TV channel up
         currentCode = currentCode % CHANNEL_UP_TOTAL;
         sendCode(CHANNEL_UP + currentCode);
         break;
@@ -78,9 +78,13 @@ void loop()
         break;
       case 7:
         break;
-      case 8:
+      case 8: //Sharp projector standby
+        currentCode = currentCode % PROJ_POWER_STANDBY_TOTAL;
+        sendCode(PROJ_POWER_STANDBY + currentCode);
         break;
-      case 9:
+      case 9: //Sharp projector volume up
+        currentCode = currentCode % PROJ_VOLUME_UP_TOTAL;
+        sendCode(PROJ_VOLUME_UP + currentCode);
         break;
     }
   }
@@ -88,15 +92,15 @@ void loop()
   {
     switch(bankNum)
     {
-      case 0: //TV power on
+      case 0: //TV power off
         currentCode = currentCode % POWER_OFF_TOTAL;
         sendCode(POWER_OFF + currentCode);
         break;
-      case 1: //TV volume up
+      case 1: //TV volume down
         currentCode = currentCode % VOLUME_DOWN_TOTAL;
         sendCode(VOLUME_DOWN + currentCode);
         break;
-      case 2:
+      case 2: //TV channel down
         currentCode = currentCode % CHANNEL_DOWN_TOTAL;
         sendCode(CHANNEL_DOWN + currentCode);
         break;
@@ -110,9 +114,13 @@ void loop()
         break;
       case 7:
         break;
-      case 8:
+      case 8: //Sharp projector power on
+        currentCode = currentCode % PROJ_POWER_ON_TOTAL;
+        sendCode(PROJ_POWER_ON + currentCode);
         break;
-      case 9:
+      case 9: //Sharp projector volume down
+        currentCode = currentCode % PROJ_VOLUME_DOWN_TOTAL;
+        sendCode(PROJ_VOLUME_DOWN + currentCode);
         break;
     }
   }

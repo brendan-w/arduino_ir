@@ -74,7 +74,7 @@ extern const uint8_t CHANNEL_DOWN_TOTAL;
 extern const IRCode PROJ_POWER_STANDBY[] PROGMEM;
 extern const uint8_t PROJ_POWER_STANDBY_TOTAL;
 extern const IRCode PROJ_POWER_ON[] PROGMEM;
-extern const uint8_t PROJ_POWER_OFF_TOTAL;
+extern const uint8_t PROJ_POWER_ON_TOTAL;
 extern const IRCode PROJ_VOLUME_UP[] PROGMEM;
 extern const uint8_t PROJ_VOLUME_UP_TOTAL;
 extern const IRCode PROJ_VOLUME_DOWN[] PROGMEM;
